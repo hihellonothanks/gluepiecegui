@@ -118,7 +118,6 @@ Section:NewDropdown("Select Target", "DropdownInf", {
     "Cutie Noob",
     "Duck Boss",
     "King Noob",
-    "Kyo",
     "Sans",
     "Sword Master"
 }, function(currentOption)
@@ -186,7 +185,6 @@ Section2:NewDropdown("Select Island", "DropdownInf", {
     "Desert Island",
     "Duck Island",
     "Evil Thug Island",
-    "Kyo Island",
     "MihanoMikura Island",
     "Noob Island",
     "Sans Island",
@@ -252,10 +250,6 @@ Section2:NewDropdown("Select Island", "DropdownInf", {
     destination["desX"] = -2761
     destination["desY"] = 17
     destination["desZ"] = 834
-    elseif currentOption2 == "Kyo Island" then
-    destination["desX"] = -2308
-    destination["desY"] = 185
-    destination["desZ"] = 2367
     end
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(destination["desX"], destination["desY"], destination["desZ"])
 end)
