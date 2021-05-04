@@ -114,7 +114,7 @@ end
     for _,v in pairs(game.Workspace:GetDescendants()) do
   if string.find(v.Name, target) and v:FindFirstChild("HumanoidRootPart") ~= nil then
       if v:FindFirstChild("Humanoid").Health > 0 then
-      game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = v:FindFirstChild("HumanoidRootPart").CFrame*CFrame.new(0, 0, 7)
+      game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = v:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, 0, 7)
       end
   end
     end
