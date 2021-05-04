@@ -110,7 +110,7 @@ if state2 then
     else
     _G.tping = false
 end
-    while _G.tping do wait()
+    while _G.tping do wait(0.2)
     for _,v in pairs(game.Workspace:GetDescendants()) do
   if string.find(v.Name, target) and v:FindFirstChild("HumanoidRootPart") ~= nil then
       if v:FindFirstChild("Humanoid").Health > 0 then
