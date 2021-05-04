@@ -1,4 +1,4 @@
--- https://xheptcofficial.gitbook.io/kavo-library/
+-- https ://xheptcofficial.gitbook.io/kavo-library/
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
@@ -16,12 +16,24 @@ local child = game.Players.LocalPlayer.Backpack:GetChildren()
 
 local toolname = nil
 
+local h = game.Players.LocalPlayer.Character.Torso
+
 local ds = {}
     for i,v in pairs(child) do
        table.insert(ds, v.Name)
     end
-Section:NewDropdown("Select Tool", "DropdownInf", ds, function(currentOption)
+    
+local toolselect = Section:NewDropdown("Select Tool", "DropdownInf", ds, function(currentOption)
     toolname = currentOption
+end)
+
+Section:NewButton("Refresh Tools", "Refreshes Dropdown", function()
+    local child2 = game.Players.LocalPlayer.Backpack:GetChildren()
+    local ds2 = {}
+    for i,v in pairs(child2) do
+       table.insert(ds2, v.Name)
+    end
+  toolselect:Refresh(ds2)
 end)
 
 _G.autoequip = nil
@@ -57,19 +69,22 @@ VUser:Button1Up(Vector2.new(math.huge,math.huge));
 end
 end)
 
-local h = game.Players.LocalPlayer.Character.Torso
-local buso = nil
 
-if h:FindFirstChildWhichIsA("ParticleEmitter") then
-    buso = true
-    else
-    buso = false
-end
-
-wait(0.5)
-print(buso)
-
+ --[[
+ 
 _G.autobuso = nil
+_G.alive = nil
+
+        game:GetService('Players').PlayerAdded:Connect(function(player)
+	player.CharacterAdded:Connect(function(character)
+		character:WaitForChild("Humanoid").Died:Connect(function()
+			_G.alive = false
+			wait(4)
+			_G.alive = true
+		end)
+	end)
+end)
+
 Section:NewToggle("Auto Buso", "ToggleInfo", function(state)
     if state then
         print("autobuso true")
@@ -80,14 +95,22 @@ Section:NewToggle("Auto Buso", "ToggleInfo", function(state)
     end
     
     while _G.autobuso do wait()
-if buso == false and not h:FindFirstChildWhichIsA("ParticleEmitter") then
-    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+
+function activate()
+if not h:FindFirstChildWhichIsA("ParticleEmitter") then
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and _G.alive then
         wait(4)
 game:GetService("ReplicatedStorage").RemoteEvent.Haki.Haki:FireServer("BusoHaki")
 end
 end
+end 
+
+
+activate()
 end
 end)
+
+--]]
 
 local target = nil
 Section:NewDropdown("Select Target", "DropdownInf", {
